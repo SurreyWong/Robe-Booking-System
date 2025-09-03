@@ -1,0 +1,104 @@
+<!-- function to store registeration details -->
+<div id="Registration" class="tabcontent">
+    <center>
+        <h2>Registration</h2>
+        <form id="registrationForm">
+            <table><!-- i used table to make it neater -->
+                <tr>
+                    <td><label for="regFname">First Name:</label></td>
+                    <td><input type="text" id="regFname" name="regFname" required></td>
+                    <td><label for="regLname">Last Name:</label></td>
+                    <td><input type="text" id="regLname" name="regLname" required></td>
+                </tr>
+                <tr>
+                    <td><label for="typeReg">Student/Attendee:</label></td>
+                    <td><input list="typeReg" id="regType" name="regType" required>
+                        <datalist id="typeReg">
+                            <option value="Student">
+                            <option value="Attendee">
+                        </datalist>
+                    </td>
+                    <td><label for="regStudentID">Student ID <i>(only for student):</i></label></td>
+                    <td><input type="number" id="regStudentID" name="regStudentID" min="1000000000" max="9999999999">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="regEmail">Email:</label></td>
+                    <td><input type="email" id="regEmail" name="regEmail" required></td>
+                </tr>
+                <tr>
+                    <td><label for="regUsername">Username:</label></td>
+                    <td><input type="text" id="regUsername" name="regUsername" required></td>
+                    <td><label for="regPassword">Password:</label></td>
+                    <td><input type="password" id="regPassword" name="regPassword" required></td>
+                </tr>
+            </table>
+            <button type="submit" id="RegisterButton">Register</button>
+            <button onclick="goToLogin()" id="loginButton">Login</button>
+        </form>
+    </center>
+    <script>
+        function goToLogin() {
+            openSection(event, 'Login');
+        }
+
+        document.getElementById("registrationForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var firstName = document.getElementById("regFname").value;
+            var lastName = document.getElementById("regLname").value;
+            var studentID = document.getElementById("regStudentID").value;
+            var type = document.getElementById("regType").value;
+            var username = document.getElementById("regUsername").value;
+            var email = document.getElementById("regEmail").value;
+            var password = document.getElementById("regPassword").value;
+            var user = {
+                firstName: firstName,
+                lastName: lastName,
+                studentID: studentID,
+                type: type,
+                username: username,
+                email: email,
+                password: password
+            };
+            localStorage.setItem("userData", JSON.stringify(user));
+            document.getElementById("registrationForm").reset();
+            alert("Registration successful!");
+        });
+    </script>
+</div>
+
+<script>function openSubSection(evt, sectionName) {
+        var i, subtabcontent, subtablinks;
+        subtabcontent = document.getElementsByClassName("subtabcontent");
+        for (i = 0; i < subtabcontent.length; i++) {
+            subtabcontent[i].style.display = "none";
+        }
+        subtablinks = document.getElementsByClassName("subtablinks");
+        for (i = 0; i < subtablinks.length; i++) {
+            subtablinks[i].className = subtablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(sectionName).style.display = "block";
+        evt.currentTarget.className += " active";
+
+        var storedUserData = localStorage.getItem("userData");
+        if (storedUserData) {
+            var userData = JSON.parse(storedUserData);
+            document.getElementById("firstName").textContent = userData.firstName;
+            document.getElementById("lastName").textContent = userData.lastName;
+            document.getElementById("email").textContent = userData.email;
+            document.getElementById("username").textContent = userData.username;
+
+            var studentIDLabel = document.getElementById("studentIDLabel");
+            var studentID = document.getElementById("studentID");
+
+            if (userData.type === "Student") {
+                studentIDLabel.style.display = "block";
+                studentID.textContent = userData.studentID;
+            } else {
+                studentIDLabel.style.display = "none";
+                studentID.textContent = "";
+            }
+
+            document.getElementById("robeSizeProfile").textContent = getRobeSize(userData);
+        }
+    }</script>

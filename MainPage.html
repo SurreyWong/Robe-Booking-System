@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Convocation system</title>
+    <style>
+        body {
+            font-family: Arial;
+            border-top: 100px solid #ffffff;
+            border-right: 250px solid #ffffff;
+            border-bottom: 100px solid #ffffff;
+            border-left: 250px solid #ffffff;
+        }
+
+        /* Style the tab */
+        .tab {
+            text-align: right;
+
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #ffffff;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        /* Style the sub tab */
+        .subtab {
+            overflow: hidden;
+            border-bottom: 1px solid #000000;
+            background-color: linear-gradient(to bottom right, #ffff99 0%, #ff99cc 100%);
+        }
+
+        /* Style the buttons inside the sub tab */
+        .subtab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+        /* Change background color of buttons on hover */
+        .subtab button:hover {
+            background-color: #ddd;
+
+        }
+
+        /* Create an active/current sub tablink class */
+        .subtab button.active {
+            color: white;
+        }
+
+        /* Style the sub tab content */
+        .subtabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #000000;
+            border-top: none;
+            color: black;
+
+        }
+
+        #Home {
+            background-image: url('grad.jpg');
+        }
+
+        #Login {
+            background: linear-gradient(to bottom right, #ffff99 0%, #ff99cc 100%);
+        }
+
+        #Registration {
+            background: linear-gradient(to bottom right, #ffff99 0%, #ff99cc 100%);
+        }
+
+        #Bookings {
+            background: linear-gradient(to bottom right, #ffff99 0%, #ff99cc 100%);
+
+        }
+
+        #Profile {
+            background: linear-gradient(to bottom right, #ffff99 0%, #ff99cc 100%);
+
+        }
+
+        #home1 {
+            font-size: 32px;
+            color: white;
+        }
+
+        #home2 {
+            font-size: 60px;
+            color: white;
+        }
+
+        #loginButton {
+            background-color: black;
+            border: none;
+            padding: 15px 32px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        #RegisterButton {
+            background-color: black;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        #informationReg {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <center><h2>SE ASSIGNMENT</h2></center>
+    
+
+    <div class="tab">
+        <img src="logo.png" alt="Logo" width="160" height="50">
+        <button class="tablinks" onclick="openSection(event, 'Home')">Home</button>
+        <button class="tablinks" onclick="openSection(event, 'Registration')">Registration</button>
+        <button class="tablinks" onclick="openSection(event, 'Login')">Login</button>
+        <button id="bookingTab" class="tablinks" style="display: none;"
+            onclick="openSection(event, 'Bookings')">Bookings</button>
+        <button id="profileTab" class="tablinks" style="display: none;"
+            onclick="openSection(event, 'Profile')">Profile</button>
+    </div>
+
+    <div id="Home" class="tabcontent">
+        <center>
+            <p id="home1">THE BEST UNIVERSITY <br> Convocation Registration website</p>
+            <p id="home2">Register for your Convocation Ceremony now</p>
+            <button onclick="goToLogin()" id="loginButton">Login</button>
+            <button onclick="goToRegistration()" id="RegisterButton"> Registration</button>
+            <br>
+        </center>
+    
+        <script>
+            function goToLogin() {
+                openSection(event, 'Login'); // Call the openSection function with 'Login' as the sectionName parameter
+            }
+
+            function goToRegistration() {
+                openSection(event, 'Registration'); // Call the openSection function with 'Registration' as the sectionName parameter
+            }
+        </script>
+    </div>
+
+    <div id="Registration" class="tabcontent">
+        <center>
+            <h2>Registration</h2>
+            <form id="registrationForm">
+                <table>
+                    <tr>
+                        <td><label for="regFname">First Name:</label></td>
+                        <td><input type="text" id="regFname" name="regFname" required></td>
+                        <td><label for="regLname">Last Name:</label></td>
+                        <td><input type="text" id="regLname" name="regLname" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="typeReg">Student/Attendee:</label></td>
+                        <td><input list="typeReg" id="regType" name="regType" required>
+                            <datalist id="typeReg">
+                                <option value="Student">
+                                <option value="Attendee">
+                            </datalist>
+                        </td>
+                        <td><label for="regStudentID">Student ID <i>(only for student):</i></label></td>
+                        <td><input type="number" id="regStudentID" name="regStudentID" min="1000000000"
+                                max="9999999999"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="regEmail">Email:</label></td>
+                        <td><input type="email" id="regEmail" name="regEmail" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="regUsername">Username:</label></td>
+                        <td><input type="text" id="regUsername" name="regUsername" required></td>
+                        <td><label for="regPassword">Password:</label></td>
+                        <td><input type="password" id="regPassword" name="regPassword" required></td>
+                    </tr>
+                </table>
+                <button type="submit" id="RegisterButton">Register</button>
+                <button onclick="goToLogin()" id="loginButton">Login</button>
+            </form>
+        </center>
+        <script>
+            function goToLogin() {
+                openSection(event, 'Login');
+            }
+
+            document.getElementById("registrationForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+                var firstName = document.getElementById("regFname").value;
+                var lastName = document.getElementById("regLname").value;
+                var studentID = document.getElementById("regStudentID").value;
+                var type = document.getElementById("regType").value;
+                var username = document.getElementById("regUsername").value;
+                var email = document.getElementById("regEmail").value;
+                var password = document.getElementById("regPassword").value;
+                var user = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    studentID: studentID,
+                    type: type,
+                    username: username,
+                    email: email,
+                    password: password
+                };
+                localStorage.setItem("userData", JSON.stringify(user));
+                document.getElementById("registrationForm").reset();
+                alert("Registration successful!");
+            });
+        </script>
+    </div>
+
+    <div id="Home" class="tabcontent">
+        <center>
+            <p>Home Page Content</p>
+        </center>
+    </div>
+
+    <div id="Login" class="tabcontent">
+        <center>
+            <h1>Log in</h1>
+            <h4>Welcome back</h4>
+            <form id="loginForm">
+                <p>
+                    <label for="loginUsername">Username:</label>
+                    <input type="text" id="loginUsername" name="loginUsername" required><br>
+                </p>
+                <p>
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" id="loginPassword" name="loginPassword" required><br>
+                </p>
+                <button type="submit" id="loginButton">Login</button>
+                <button onclick="goToRegistration()" id="RegisterButton"> Registration</button>
+            </form>
+        </center>
+        <script>
+            function goToRegistration() {
+                openSection(event, 'Registration');
+            }
+
+            document.getElementById("loginForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+                var enteredUsername = document.getElementById("loginUsername").value;
+                var enteredPassword = document.getElementById("loginPassword").value;
+                var storedUserData = localStorage.getItem("userData");
+                if (storedUserData) {
+                    var userData = JSON.parse(storedUserData);
+                    if (enteredUsername === userData.username && enteredPassword === userData.password) {
+                        alert("Login successful!");
+                        document.getElementById("bookingTab").style.display = "block";
+                        document.getElementById("profileTab").style.display = "block";
+                        openSection(event, 'Bookings');
+                    } else {
+                        alert("Invalid username or password. Please try again.");
+                    }
+                } else {
+                    alert("No user data found. Please register first.");
+                }
+                document.getElementById("loginForm").reset();
+            });
+        </script>
+    </div>
+
+    <div id="Bookings" class="tabcontent">
+        <center><h1>Bookings</h1></center>
+        <div class="booking-option">
+            <h4>Attendance</h4>
+            <button id="attendanceBookingButton" onclick="bookAttendance()">Book Attendance</button>
+        </div>
+        <div class="booking-option">
+            <h4>Robes</h4>
+            <label for="robeSize">Select Size:</label>
+            <select id="robeSize">
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+            </select>
+            <button id="robesBookingButton" onclick="bookRobes()">Book Robes</button>
+        </div>
+        <script>
+            var userBookings = {
+                attendance: [],
+                robes: []
+            };
+
+            function bookAttendance() {
+                alert("Attendance booked successfully!");
+                userBookings.attendance.push(new Date().toLocaleString());
+                displayUserBookings();
+                document.getElementById("attendanceBookingButton").disabled = true;
+            }
+
+            function bookRobes() {
+                var selectedSize = document.getElementById("robeSize").value;
+                alert("Robes booked successfully! Size: " + selectedSize);
+                userBookings.robes.push({ size: selectedSize, dateTime: new Date().toLocaleString() });
+                displayUserBookings();
+                document.getElementById("robesBookingButton").disabled = true;
+            }
+
+            function displayUserBookings() {
+                var attendanceDiv = document.getElementById("attendanceBookings");
+                var robesDiv = document.getElementById("robesBookings");
+
+                attendanceDiv.innerHTML = "<h5>Attendance Bookings:</h5>";
+                for (var i = 0; i < userBookings.attendance.length; i++) {
+                    attendanceDiv.innerHTML += "<p>" + userBookings.attendance[i] + "</p>";
+                }
+
+                robesDiv.innerHTML = "<h5>Robes Bookings:</h5>";
+                for (var j = 0; j < userBookings.robes.length; j++) {
+                    robesDiv.innerHTML += "<p>" + userBookings.robes[j].size + " - " + userBookings.robes[j].dateTime + "</p>";
+                }
+            }
+        </script>
+    </div>
+
+    <div id="Profile" class="tabcontent">
+        <center><h1>Profile</h1></center>
+        <div class="subtab">
+            <button class="subtablinks" onclick="openSubSection(event, 'MyBookings')">My Bookings</button>
+            <button class="subtablinks" onclick="openSubSection(event, 'MyDetails')">My Details</button>
+        </div>
+        <div id="MyBookings" class="subtabcontent">
+            <h4>My Bookings</h4>
+            <div id="attendanceBookings"></div>
+            <div id="robesBookings"></div>
+        </div>
+        <div id="MyDetails" class="subtabcontent">
+            <h4>My Details</h4>
+            <p>First Name: <span id="firstName"></span></p>
+            <p>Last Name: <span id="lastName"></span></p>
+            <p>Email: <span id="email"></span></p>
+            <p>Username: <span id="username"></span></p>
+            <p id="studentIDLabel">Student ID: <span id="studentID"></span></p>
+            <p>Robe Size: <span id="robeSizeProfile"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function openSection(evt, sectionName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(sectionName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    
+        function openSubSection(evt, sectionName) {
+            var i, subtabcontent, subtablinks;
+            subtabcontent = document.getElementsByClassName("subtabcontent");
+            for (i = 0; i < subtabcontent.length; i++) {
+                subtabcontent[i].style.display = "none";
+            }
+            subtablinks = document.getElementsByClassName("subtablinks");
+            for (i = 0; i < subtablinks.length; i++) {
+                subtablinks[i].className = subtablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(sectionName).style.display = "block";
+            evt.currentTarget.className += " active";
+    
+            var storedUserData = localStorage.getItem("userData");
+            if (storedUserData) {
+                var userData = JSON.parse(storedUserData);
+                document.getElementById("firstName").textContent = userData.firstName;
+                document.getElementById("lastName").textContent = userData.lastName;
+                document.getElementById("email").textContent = userData.email;
+                document.getElementById("username").textContent = userData.username;
+    
+                var studentIDLabel = document.getElementById("studentIDLabel");
+                var studentID = document.getElementById("studentID");
+    
+                if (userData.type === "Student") {
+                    studentIDLabel.style.display = "block";
+                    studentID.textContent = userData.studentID;
+                } else {
+                    studentIDLabel.style.display = "none";
+                    studentID.textContent = "";
+                }
+    
+                document.getElementById("robeSizeProfile").textContent = getRobeSize(userData);
+            }
+        }
+    
+        function getRobeSize(userData) {
+            var size = "";
+            if (userData.type === "Student") {
+                if (userBookings.robes.length > 0) {
+                    size = userBookings.robes[userBookings.robes.length - 1].size;
+                }
+            }
+            return size;
+        }
+    
+        function displayUserBookings() {
+            var attendanceDiv = document.getElementById("attendanceBookings");
+            var robesDiv = document.getElementById("robesBookings");
+    
+            attendanceDiv.innerHTML = "<h5>Attendance Bookings:</h5>";
+            for (var i = 0; i < userBookings.attendance.length; i++) {
+                attendanceDiv.innerHTML += "<p>Attendance booked - " + userBookings.attendance[i] + "</p>";
+            }
+    
+            robesDiv.innerHTML = "<h5>Robes Bookings:</h5>";
+            for (var j = 0; j < userBookings.robes.length; j++) {
+                robesDiv.innerHTML += "<p>Robe booked - " + userBookings.robes[j].size + " - " + userBookings.robes[j].dateTime + "</p>";
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!-- function to create login based on registeration data -->
+
+<div id="Login" class="tabcontent">
+    <center>
+        <h1>Log in</h1>
+        <h4>Welcome back</h4>
+        <form id="loginForm">
+            <p>
+                <label for="loginUsername">Username:</label>
+                <input type="text" id="loginUsername" name="loginUsername" required><br>
+            </p>
+            <p>
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="loginPassword" required><br>
+            </p>
+            <button type="submit" id="loginButton">Login</button>
+            <button onclick="goToRegistration()" id="RegisterButton"> Registration</button>
+        </form>
+    </center>
+    <script>
+        function goToRegistration() {
+            openSection(event, 'Registration');
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var enteredUsername = document.getElementById("loginUsername").value;
+            var enteredPassword = document.getElementById("loginPassword").value;
+            var storedUserData = localStorage.getItem("userData");
+            if (storedUserData) {
+                var userData = JSON.parse(storedUserData);
+                if (enteredUsername === userData.username && enteredPassword === userData.password) {
+                    alert("Login successful!");
+                    document.getElementById("bookingTab").style.display = "block";
+                    document.getElementById("profileTab").style.display = "block";
+                    openSection(event, 'Bookings');
+                } else {
+                    alert("Invalid username or password. Please try again.");
+                }
+            } else {
+                alert("No user data found. Please register first.");
+            }
+            document.getElementById("loginForm").reset();
+        });
+    </script>
+</div>

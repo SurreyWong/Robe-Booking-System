@@ -1,0 +1,100 @@
+<!-- function to create booking for robes at booking page -->
+
+<div id="Bookings" class="tabcontent">
+    <center><h1>Bookings</h1></center>
+    
+    <div class="booking-option">
+        <h4>Robes</h4>
+        <label for="robeSize">Select Size:</label>
+        <select id="robeSize">
+            <option value="small">Small</option>
+            <option value="medium">Medium</option>
+            <option value="large">Large</option>
+        </select>
+        <button id="robesBookingButton" onclick="bookRobes()">Book Robes</button>
+    </div>
+    <script>
+        var userBookings = {
+            attendance: [],
+            robes: []
+        };
+
+        
+
+        function bookRobes() {
+            var selectedSize = document.getElementById("robeSize").value;
+            alert("Robes booked successfully! Size: " + selectedSize);
+            userBookings.robes.push({ size: selectedSize, dateTime: new Date().toLocaleString() });
+            displayUserBookings();
+            document.getElementById("robesBookingButton").disabled = true;
+        }
+
+        function displayUserBookings() {
+            var attendanceDiv = document.getElementById("attendanceBookings");
+            var robesDiv = document.getElementById("robesBookings");
+
+            attendanceDiv.innerHTML = "<h5>Attendance Bookings:</h5>";
+            for (var i = 0; i < userBookings.attendance.length; i++) {
+                attendanceDiv.innerHTML += "<p>" + userBookings.attendance[i] + "</p>";
+            }
+
+            robesDiv.innerHTML = "<h5>Robes Bookings:</h5>";
+            for (var j = 0; j < userBookings.robes.length; j++) {
+                robesDiv.innerHTML += "<p>" + userBookings.robes[j].size + " - " + userBookings.robes[j].dateTime + "</p>";
+            }
+        }
+    </script>
+</div>
+
+<!-- function to display booking for robes at profile page -->
+
+<div id="Profile" class="tabcontent">
+    <center><h1>Profile</h1></center>
+    <div class="subtab">
+        <button class="subtablinks" onclick="openSubSection(event, 'MyBookings')">My Bookings</button>
+        
+    </div>
+    <div id="MyBookings" class="subtabcontent">
+        <h4>My Bookings</h4>
+        
+        <div id="robesBookings"></div>
+    </div>
+    
+</div>
+
+<script>
+    function openSection(evt, sectionName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(sectionName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    
+
+    function getRobeSize(userData) {
+        var size = "";
+        if (userData.type === "Student") {
+            if (userBookings.robes.length > 0) {
+                size = userBookings.robes[userBookings.robes.length - 1].size;
+            }
+        }
+        return size;
+    }
+
+    function displayUserBookings() {    
+        var robesDiv = document.getElementById("robesBookings");
+
+        robesDiv.innerHTML = "<h5>Robes Bookings:</h5>";
+        for (var j = 0; j < userBookings.robes.length; j++) {
+            robesDiv.innerHTML += "<p>Robe booked - " + userBookings.robes[j].size + " - " + userBookings.robes[j].dateTime + "</p>";
+        }
+    }
+</script>
